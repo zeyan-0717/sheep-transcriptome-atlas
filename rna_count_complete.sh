@@ -9,11 +9,11 @@ date
 
 ## set path
 # folder
-workdir=/public/home/b20203040294/project3/
-index=/public/home/b20203040294/project2/ref/star_index/
+workdir=<SET_YOUR_PATH>
+index=<YOUR_PATH_TO_STAR_INDEX/star_index/>
 # file
-reference=/public/home/b20203040294/project2/ref/Ovis_aries_rambouillet.Oar_rambouillet_v1.0.dna.toplevel.fa
-gtf=/public/home/b20203040294/project2/gtf/Ovis_aries_rambouillet.Oar_rambouillet_v1.0.101.gtf
+reference=<YOUR_PATH_TO_REFERENCE/Ovis_aries_rambouillet.Oar_rambouillet_v1.0.dna.toplevel.fa>
+gtf=<YOUR_PATH_TO_GTF/Ovis_aries_rambouillet.Oar_rambouillet_v1.0.101.gtf>
 
 # step1:build index
 STAR \
