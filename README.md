@@ -14,7 +14,7 @@ There are mainly five parts of analysis in our study, including **RNA-Seq, scRNA
 Genome reference and annotation files used in this study are downloaded from Ensembl genome browser: https://asia.ensembl.org/Ovis_aries_rambouillet/Info/Index (i.e., **Oar_rambouillet_v1.0**).
 
 ### 2.3 Data table
-Metatable of sequencing data have been uploaded. Find more details about our data in "Data_table.xlsx" file.
+Details about newly generated sequencing data and public data in our study are summarized in the "Data_table.xlsx" file.
 
 
 ## 3.Data availability 
