@@ -1,4 +1,4 @@
-
+#### Selective sweep test based on Fst ####
 for i in {1..27}
 do
 bcftools view <SET_YOUR_PATH_TO_VCF/>RD.chr${i}.snp.vcf.gz -c 1 -S <SET_YOUR_PATH>/sample.list --threads 4 -Oz > <SET_YOUR_PATH>/TIB.chr${i}.snp.vcf.gz
