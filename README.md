@@ -12,6 +12,6 @@ There are mainly five parts of analysis in our study, including **RNA-Seq, scRNA
 
 3.Data availability 
 ----
-Raw data in this study are publicly available for download after release without restriction from the Sequence Read Archive (SRA) database in NCBI under accession number PRJNA1000743, PRJNA1001016 and PRJNA1001505.
+Raw data in this study are publicly available for download after release without restriction, which was deposited in Sequence Read Archive (SRA) database in NCBI under accession number PRJNA1000743, PRJNA1001016 and PRJNA1001505.
 
 Any questions, please feel free to contact yanze@cau.edu.cn.
