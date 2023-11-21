@@ -8,9 +8,10 @@ The preprint of our work is online on biorxiv: https://www.biorxiv.org/content/1
 
 2.The main contents
 ----
+There are mainly five parts of analysis in our study, including **RNA-Seq, scRNA-Seq, ATAC-Seq, Hi-C and WGS**. Scripts for scRNA-Seq data analysis have been uploaded to https://github.com/tian6067/WeiwtCAU-sc-RNA_seq.
 
 3.Data availability 
 ----
+Raw data in this study are publicly available for download after release without restriction from the Sequence Read Archive (SRA) database in NCBI under accession number PRJNA1000743, PRJNA1001016 and PRJNA1001505.
 
-
-Scripts for scRNA-Seq data analysis in our study have been uploaded to https://github.com/tian6067/WeiwtCAU-sc-RNA_seq.
+Any questions, please feel free to contact yanze@cau.edu.cn.
