@@ -16,8 +16,11 @@ Genome reference and annotation files used in this study are downloaded from Ens
 ### 2.3 Data table
 Details about newly generated sequencing data and public data in our study are summarized in the "Data_table.xlsx" file.
 
+### 2.4 Result files
+We provide **integrated expression matrix, consensus peak set with metatable** in our study. **Measurement phenotypic data** has been uploaded as well.
+
 
 ## 3.Data availability 
-Raw data in this study are publicly available for download after release without restriction, which was deposited in Sequence Read Archive (SRA) database in NCBI under accession number PRJNA1000743, PRJNA1001016 and PRJNA1001505.
+High-througput sequencing data in this study are publicly available for download after release without restriction, which was deposited in Sequence Read Archive (SRA) database in NCBI under accession number PRJNA1000743, PRJNA1001016 and PRJNA1001505.
 
 Any questions, please feel free to contact yanze@cau.edu.cn.
