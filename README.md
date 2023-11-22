@@ -17,7 +17,7 @@ Genome reference and annotation files used in this study are downloaded from Ens
 Details about newly generated sequencing data and public data in our study are summarized in the "Data_table.xlsx" file.
 
 ### 2.4 Result files
-We provide **integrated expression matrix, consensus peak set with metatable** in our study. **Measurement phenotypic data** has been uploaded as well.
+We provide **integrated expression matrix, consensus peak set with metatable and measurement phenotypic data** in our study, which have been uploaded to Google drive: https://drive.google.com/file/d/1iTbn5IVPGVGEp7nkeNCgjDvtqjXjPQQ8/view?usp=sharing.
 
 
 ## 3.Data availability 
