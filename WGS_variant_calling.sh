@@ -1,20 +1,35 @@
+## set variables
+gatk=<SET_YOUR_PATH_TO_SOFTWARE>
+bwa=<SET_YOUR_PATH_TO_SOFTWARE>
+samtools=<SET_YOUR_PATH_TO_SOFTWARE>
+Trimmomatic=<SET_YOUR_PATH_TO_SOFTWARE>
+
+ref=<SET_YOUR_PATH_TO_REFERENCE_GENOME>
+clean_fastq=<SET_YOUR_PATH>
+unpaired_fastq=<SET_YOUR_PATH>
+bamfile=<SET_YOUR_PATH>
+output=<SET_YOUR_PATH>
+
+
 ## raw data to clean data
 java -jar $Trimmomatic PE -phred33 \
-$path/BFC2016518-01-MXS9_HJMTHALXX_L4_1.fq.gz $path/BFC2016518-01-MXS9_HJMTHALXX_L4_2.fq.gz \
-$clean_fastq/C_MXS9_1.fq.gz $unpaired_fastq/L_MXS9_1.fq.gz $clean_fastq/C_MXS9_2.fq.gz $unpaired_fastq/L_MXS9_2.fq.gz \
+$path/<YOUR_DATA>_1.fq.gz $path/<YOUR_DATA>_2.fq.gz \
+$clean_fastq/<YOUR_DATA>_1.fq.gz $unpaired_fastq/<YOUR_DATA>_1.fq.gz $clean_fastq/<YOUR_DATA>_2.fq.gz $unpaired_fastq/<YOUR_DATA>_2.fq.gz \
 ILLUMINACLIP:$adapter/TruSeq3-PE.fa:2:30:10:1:TRUE LEADING:20 TRAILING:20 SLIDINGWINDOW:4:15 -threads 4 MINLEN:50
 
 ## alignment
 $bam/bwa mem -1 -t 10 -k 32 -M -R "@RG\tID:MXS9\tSM:MXS9\tLB:lib\tPL:illumina" \
-$ref/Oar_rambouillet.fa $clean_fastq/C_MXS9_1.fq.gz $clean_fastq/C_MXS9_2.fq.gz | $samtools/samtools view -@ 10 -bS -F 4 -f 0x2 -t $ref/Oar_rambouillet.fa.fai -o $bamfile/MXS9.T1.bam
-$gatk/gatk --java-options "-Xmx30G -XX:+UseParallelGC -XX:ParallelGCThreads=10" SortSam --INPUT $bamfile/MXS9.T1.bam -OUTPUT $bamfile/MXS9.T2.bam --SORT_ORDER coordinate
-$gatk/gatk --java-options "-Xmx30G -XX:+UseParallelGC -XX:ParallelGCThreads=10" MarkDuplicates --INPUT $bamfile/MXS9.T2.bam -M $bamfile/MXS9.marked_dup_metrics.txt --OUTPUT $bamfile/MXS9.duplicate.bam
+$ref/Oar_rambouillet.fa $clean_fastq/<YOUR_DATA>_1.fq.gz $clean_fastq/<YOUR_DATA>_2.fq.gz | $samtools/samtools view -@ 10 -bS -F 4 -f 0x2 -t $ref/Oar_rambouillet.fa.fai -o $bamfile/<YOUR_DATA>.T1.bam
+# sort coordinate
+$gatk/gatk --java-options "-Xmx30G -XX:+UseParallelGC -XX:ParallelGCThreads=10" SortSam --INPUT $bamfile/<YOUR_DATA>.T1.bam -OUTPUT $bamfile/<YOUR_DATA>.T2.bam --SORT_ORDER coordinate
+# remove the duplicates
+$gatk/gatk --java-options "-Xmx30G -XX:+UseParallelGC -XX:ParallelGCThreads=10" MarkDuplicates --INPUT $bamfile/<YOUR_DATA>.T2.bam -M $bamfile/<YOUR_DATA>.marked_dup_metrics.txt --OUTPUT $bamfile/<YOUR_DATA>.duplicate.bam
 
 
 ## bam to gvcf
 $gatk --java-options "-Xmx20G -XX:+UseParallelGC -XX:ParallelGCThreads=4" \
 HaplotypeCaller -R $ref/Oar_rambouillet.fa \
--I $bam/'MXS9.duplicate.bam \
+-I $bam/<YOUR_DATA>.duplicate.bam \
 --genotyping-mode DISCOVERY \
 --input-prior 0.001 --input-prior 0.4995 -ERC GVCF -OVI true -L '$j' \
 -O $output/chr'${j}'/'${i}.${j}'.g.vcf.gz
@@ -23,19 +38,19 @@ HaplotypeCaller -R $ref/Oar_rambouillet.fa \
 ## Joint genotyping gvcf
 $gatk-4.1.2.0/gatk --java-options "-Xmx30G -XX:+UseParallelGC -XX:ParallelGCThreads=10" \
 GenomicsDBImport \
---genomicsdb-workspace-path /public/home/casdao/kdylvfenghua/kdylvfenghua/Adaptation_Project/vcf/chr'${i}'/DB \
+--genomicsdb-workspace-path <YOUR_DATA_TO_VCF>/chr'${i}'/DB \
 --batch-size 100 \
 --intervals '${i}' \
---sample-name-map /public/home/casdao/kdylvfenghua/kdylvfenghua/Adaptation_Project/gvcf/gvcf_T/859_map.list \
---tmp-dir=/public/home/casdao/kdylvfenghua/kdylvfenghua/Adaptation_Project/vcf/chr'${i}'/tmp \
---reference /public/home/casdao/kdylvfenghua/kdylvfenghua/reference/Oar_rambouillet.fa \
+--sample-name-map <YOUR_DATA_TO_GVCF>/gvcf_T/<YOUR_SAMPLE>.list \
+--tmp-dir=<YOUR_DATA_TO_VCF>/chr'${i}'/tmp \
+--reference $ref/Oar_rambouillet.fa \
 --reader-threads 10'
 
 
 ## output vcf file
 $gatk --java-options "-Xmx30G -XX:+UseParallelGC -XX:ParallelGCThreads=10" \
 GenotypeGVCFs \
---reference /public/home/casdao/kdylvfenghua/kdylvfenghua/reference/Oar_rambouillet.fa \
--V gendb:/public/home/casdao/kdylvfenghua/kdylvfenghua/Adaptation_Project/vcf/chr'${i}'/DB \
--O /public/home/casdao/kdylvfenghua/kdylvfenghua/Adaptation_Project/vcf/chr'${i}'/raw_chr'${i}'.vcf.gz'
+--reference $ref/Oar_rambouillet.fa \
+-V gendb:<YOUR_DATA_TO_VCF>/chr'${i}'/DB \
+-O <YOUR_DATA_TO_VCF>/chr'${i}'/raw_chr'${i}'.vcf.gz'
 
