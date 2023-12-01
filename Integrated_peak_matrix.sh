@@ -1,3 +1,5 @@
+# software required: bedtools, deeptools
+
 workdir=<SET_YOUR_DIR>
 
 ## step 1 : get peak read ##
