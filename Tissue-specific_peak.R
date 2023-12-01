@@ -5,27 +5,28 @@ options(stringsAsFactors = F)
 # set dir
 setwd("<SET_YOUR_DIR>")
 # input peak sample info
-peak_info <- readRDS("F:/sheep_adaptation/atac/peak_sample_info.rds")
+peak_info <- readRDS("<SET_YOUR_DIR>/atac/peak_sample_info.rds")
 str(peak_info)
+
  # input consenus peak count matrix
-df <- data.table::fread("F:/sheep_adaptation/data/tissue_specific_peak/readRPKM_atac_sorted.tab",
-                        sep = "\t",stringsAsFactors = F,header = T)
-df[1:5,1:5]
+df <- data.table::fread("<SET_YOUR_DIR>/readRPKM_atac_sorted.tab", sep = "\t",stringsAsFactors = F,header = T)
+df[1:5,1:5] # check data
 names(df) <- c("chr","start","end",peak_info$SampleID)
 df$peakID <- str_c(df$chr,"_",df$start,"_",df$end)
 dim(df)
+
 # get RPKM matrix
 peak_mat <- df[,4:69] %>% as.matrix()
 class(peak_mat)
 rownames(peak_mat) <- df$peakID
 peak_mat[1:5,1:5]
+
 # normalize
-# study: https://www.jianshu.com/p/f7aba2e69dc8
-# study: https://www.biostars.org/p/413626/#414440
 peak_mat_normal <- preprocessCore::normalize.quantiles(peak_mat)
 row.names(peak_mat_normal) <- df$peakID
 colnames(peak_mat_normal) <- colnames(peak_mat)
 peak_mat_normal[1:5,1:5]
+
 ##-------------------------------------------------------------##
 ##              Normalize raw readscount by RPM                ##
 ##-------------------------------------------------------------##
@@ -51,11 +52,11 @@ colnames(tsne) <- c("tSNE1","tSNE2")
 tsne$tissue <- peak_info$Tissue 
 tsne$group <- peak_info$Group
 class(tsne)
-saveRDS(tsne,"F:/sheep_adaptation/atac/atac_tsne.rds")
+saveRDS(tsne,"<SET_YOUR_DIR>/atac/atac_tsne.rds")
+
 # visualization
 mycolor <- c("Hypothalamus"="#ef8737","Duodenum"="#47632a", "Spleen"="#f05b43","Heart" = "#d33682",
              "Adipose"="darkcyan","Lung"="#FDAF9199", "Liver"="#6c71c4","Rumen" = "#B4EEB4")
-
 p1 <- ggplot(tsne,aes(tSNE1,tSNE2,color=tissue,shape=group)) + 
   geom_point(size=2.8,alpha=0.8) + 
   labs(x="t-SNE1", y="t-SNE2") +
@@ -71,6 +72,7 @@ p1 <- ggplot(tsne,aes(tSNE1,tSNE2,color=tissue,shape=group)) +
         panel.grid=element_blank(),
         plot.margin = margin(t=2,r=2,b=2,l=2,unit = "cm"))
 p1
+
 # save as pdf
 pdf("F:/sheep_adaptation/atac/atac_tsne.pdf",height = 5 ,width = 7.2)
 p1
@@ -81,9 +83,6 @@ rm(tsne,tsne_res)
 ##-------------------------------------------------------------##
 ##               Identify tissue specific peaks                ##
 ##-------------------------------------------------------------##
-# study: https://static-content.springer.com/esm/art%3A10.1038%2Fs41597-019-0071-0/MediaObjects/41597_2019_71_MOESM2_ESM.txt
-# study: https://www.nature.com/articles/s41597-019-0071-0#code-availability
-
 # calculate median/average RPKM 
 tissue <- unique(peak_info$Tissue)
 tissue
@@ -106,8 +105,8 @@ write.table(MEDIAN_mat_bed,"../ts_normalized_median_RPKM.bed",row.names = F, quo
 rm(mat1)
 saveRDS(MEDIAN_mat,"../ts_normalized_median_RPKM.rds")
 
-## shannon entropy
-MEDIAN_mat <- readRDS("../ts_normalized_median_RPKM.rds")
+## calculate shannon entropy
+MEDIAN_mat <- readRDS("<SET_YOUR_DIR>/ts_normalized_median_RPKM.rds")
 ratio <- as.data.frame(t(apply(MEDIAN_mat,1,function(x) x/sum(x)))) # calculate Ri
 # define function
 entropy <- function(a){
@@ -123,7 +122,7 @@ sum(is.na(entro$`apply(ratio, 1, entropy)`)) # no missing value
 sta <- as.data.frame(seq(from=0,to=3.2,by=0.01))
 # summarise distribution based on entropy score
 for(i in 1:nrow(sta)){
-  sub_entropy <- subset(entro, entro$`apply(ratio, 1, entropy)`<sta[i,1])
+  sub_entropy <- subset(entro, entro$`apply(ratio, 1, entropy)`< sta[i,1])
   sta[i,2] <- nrow(sub_entropy)
 }
 colnames(sta)=c("entropy","peak_num")
@@ -145,7 +144,7 @@ sub_plot<- subset(plot,plot$`apply(ratio, 1, entropy)`<2.5) # Peaks with entropy
 order_sub_plot <- sub_plot[order(sub_plot$`apply(ratio, 1, entropy)`),]
 saveRDS(order_sub_plot,"order_sub_plot.rds")
 
-order_sub_plot <- readRDS("./order_sub_plot.rds")
+order_sub_plot <- readRDS("<SET_YOUR_DIR>/order_sub_plot.rds")
 tissue_name=colnames(sub_plot[,-9])
 for(i in seq(nrow(order_sub_plot))){
   a <- as.matrix(order_sub_plot[i,-9])
@@ -153,10 +152,9 @@ for(i in seq(nrow(order_sub_plot))){
 }
 re_order_sub_plot <- order_sub_plot[order(order_sub_plot$V10),]
 table(re_order_sub_plot$V10)
-# dput(unique(re_order_sub_plot$V10)),sort tissues manually
 re_order_sub_plot <- re_order_sub_plot[,c("Adipose", "Duodenum", "Heart", "Hypothalamus", "Liver", "Lung","Rumen", "Spleen")] 
+                               
 ## visualize 
-# pheatmap::pheatmap(log2(re_order_sub_plot+1),cluster_rows = FALSE,cluster_cols = FALSE,color= viridis::inferno(50),main="Tissue specific peaks",show_rownames = F)
 mycolor2 <- list(tissue=c("Hypothalamus"="#ef8737","Duodenum"="#47632a", "Spleen"="#f05b43",
                           "Heart" = "#d33682", "Adipose"="darkcyan","Lung"="#FDAF9199", 
                           "Liver"="#6c71c4", "Rumen" = "#B4EEB4")) 
@@ -222,7 +220,7 @@ for(i in 1:8){
   write.table(df1, paste(tissue_name[i],"_ts_peaks.bed",sep=""),quote = FALSE,row.names = FALSE,col.names = FALSE,sep="\t")
 }
 
-## subset peaks in one tissues (maybe too less peak)
+## subset peaks in one tissues (may cause unsufficient peak)
 table(nth_1$tissue)
 names(nth_1) <- c("tissue","peakID")
 nth_1_peak <- left_join(nth_1,df[,c("chr","start","end","peakID")] ,by="peakID")
