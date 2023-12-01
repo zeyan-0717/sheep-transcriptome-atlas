@@ -38,7 +38,7 @@ detach("package:sva")
 
 
 ## step 3: identify tissue-specific genes
-library(limma) # t-test, require data obey normal distribution
+library(limma) 
 # normal transform
 combat_count_normal <- log2(combat_count+1)
 Tissue <- unique(meta$tissue)
