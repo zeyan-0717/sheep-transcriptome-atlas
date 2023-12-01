@@ -8,7 +8,8 @@ setwd("<SET_YOUR_PATH/DEG/raw_DEG_res>")
 # load("<SET_YOUR_PATH/raw_count_matrix.RData>")
 # load("<SET_YOUR_PATH/tpm_matrix.RData>")
 raw_count <- readRDS("F:/sheep_adaptation/data/mature_raw_count_matrix.rds")
-raw_count[1:5,1:5]
+# check data
+raw_count[1:5,1:5] 
 dim(raw_count)
 
 sample_info <- readRDS("<SET_YOUR_PATH/sample_phenotype.rds>")
@@ -35,7 +36,6 @@ pairwise1 <- list(compare1 = c("group","D07_Hu","D0_Hu"),
 Tissue <- unique(sample_info$tissue)
 Tissue
 
-
 TB <- NA
 for (i in 1:length(Tissue)) {
   meta <- dplyr::filter(sample_info,tissue==Tissue[i])
@@ -61,8 +61,8 @@ for (i in 1:length(Tissue)) {
 
     #### analysis  ####
     ## step 1 :
-    p_value <- 0.01
-    FC <- 0.75
+    p_value <- <SET_YOUR_PARAMETER>
+    FC <- <SET_YOUR_PARAMETER>
     
     dds_wd <- DESeq(dds) # DEG analysis
     res_wd <- results(dds_wd) # build the results table
@@ -71,7 +71,6 @@ for (i in 1:length(Tissue)) {
     res1 <- results(dds_wd,contrast = pairwise1[[j]])
     summary(res1)
     table(res1$padj < p_value & abs(res1$log2FoldChange) >= FC)
-    # table(res1$pvalue < 0.05 & abs(res1$log2FoldChange)>1)
     
     # step 2: select DEG
     df1 <- data.frame(res1, stringsAsFactors = FALSE, check.names = FALSE) 
@@ -88,7 +87,7 @@ for (i in 1:length(Tissue)) {
     df2$group <- paste("adjacent_",j,sep="")
     df <- rbind(df,df2)
     
-    # up and dw gene number
+    # summarize up and dw gene number
     DF[j,c("down")] <- table(df2$change)[1]
     DF[j,c("up")] <- table(df2$change)[2]
     DF[j,c("time")] <- paste("adjacent_",j,sep="")
@@ -127,7 +126,7 @@ color1 <- c("Pituitary"="darkorange1","Hypothalamus"="#ef8737","Cerebellum"="#ff
             "Leukocyte"="#dc322f", "Spleen"="#f05b43","Heart" = "#d33682", "Muscle"="#9f2d55","Artery" = "#CD5B45",
             "Adipose"="darkcyan","Lung"="#FDAF9199", "Liver"="#6c71c4", "Kidney"="#016392","Rumen" = "#B4EEB4")
 
-pdf("F:/sheep_adaptation/data/DEG_change.pdf",width = 12, height = 16)
+pdf("<YOUR_PATH>/DEG_change.pdf",width = 12, height = 16)
 ggplot(df,aes(time,number,linetype=change,color=tissue)) +
   geom_line(aes(time,number,group=change),size=0.8)+
   geom_point(size=2) +
@@ -145,5 +144,5 @@ ggplot(df,aes(time,number,linetype=change,color=tissue)) +
   facet_wrap(~tissue,ncol=4, scales = "free_y")
 dev.off()
 
-rm(df1,df2,df3,dds,dds_wd,countMatrix,res_wd,res1,raw_count,pairwise1,meta,meta1,TB,df,DF)
+rm(df1,df2,df3,dds,dds_wd,countMatrix,res_wd,res1,raw_count,pairwise1,meta,meta1,TB,df,DF);gc()
 
