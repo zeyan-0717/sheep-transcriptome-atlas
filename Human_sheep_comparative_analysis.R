@@ -38,9 +38,6 @@ save(expression_inter,file="integratedallgenes.Rdata")
 # ------------------------------------------------------------------------ #
 #                              t-sne clustering                            #
 # ------------------------------------------------------------------------ #
-# study: https://cloud.tencent.com/developer/article/1556202
-# study:https://cran.r-project.org/web/packages/Rtsne/Rtsne.pdf
-
 load("combine_meta_table.Rdata")
 load("integratedallgenes.Rdata")
 
@@ -93,7 +90,7 @@ Tissue <- c("Adipose", "Artery","Cerebellum", "Colon",
             "Leukocyte", "Liver", "Lung", "Muscle", 
             "Pituitary", "Spleen")
 
-p4 <- tsne %>% filter(tissue %in% Tissue) %>% 
+p2 <- tsne %>% filter(tissue %in% Tissue) %>% 
   ggplot(aes(tSNE1,tSNE2,color=tissue)) + 
   geom_point(size=1.8, alpha= 0.5) + 
   labs(x=expression(paste(italic(t),"-SNE1")),
@@ -109,7 +106,7 @@ p4 <- tsne %>% filter(tissue %in% Tissue) %>%
         axis.text.y=element_text(size = 10,face = "bold"),
         panel.grid=element_blank(),
         plot.margin = margin(t=1,r=1,b=1,l=1,unit = "cm"))
-p4
+p2
 
 pdf("human_sheep_tissue_clustering_v2.pdf",width = 5.5,height = 4)
 p4
