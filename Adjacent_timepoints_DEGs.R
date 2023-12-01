@@ -5,13 +5,12 @@ options(stringsAsFactors = T)
 ## set dir
 setwd("<SET_YOUR_PATH/DEG/raw_DEG_res>")
 ## input files
-# load("<SET_YOUR_PATH/raw_count_matrix.RData>")
-# load("<SET_YOUR_PATH/tpm_matrix.RData>")
-raw_count <- readRDS("F:/sheep_adaptation/data/mature_raw_count_matrix.rds")
-# check data
+raw_count <- readRDS("<SET_YOUR_PATH>/mature_raw_count_matrix.rds")
+# check expression data
 raw_count[1:5,1:5] 
 dim(raw_count)
 
+# input meta table
 sample_info <- readRDS("<SET_YOUR_PATH/sample_phenotype.rds>")
 dim(sample_info)
 head(sample_info)
