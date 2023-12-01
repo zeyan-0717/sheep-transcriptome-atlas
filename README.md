@@ -23,4 +23,4 @@ We provide **integrated expression matrix, consensus peak set with metatable and
 ## 3.Data availability 
 High-througput sequencing data in this study are publicly available for download without restriction, which was deposited in Sequence Read Archive (SRA) database in NCBI under accession number PRJNA1000743, PRJNA1001016 and PRJNA1001505.
 
-Any questions, please feel free to contact yanze@cau.edu.cn.
+Any questions, feel free to contact yanze@cau.edu.cn.
