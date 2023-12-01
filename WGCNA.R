@@ -1,7 +1,6 @@
 library(tidyverse)
 library(DESeq2)
 library(WGCNA)
-
 options(stringsAsFactors=F)
 
 setwd("<YOUR_WORK_DIR>")
@@ -12,12 +11,12 @@ setwd("<YOUR_WORK_DIR>")
 Tissue <- c("blood)
 
 for (i in 1:length(Tissue)) {
-  raw_count <- readRDS("F:/sheep_adaptation/data/mature_raw_count_matrix.rds")
+  raw_count <- readRDS("<SET_YOUR_DIR>/mature_raw_count_matrix.rds")
   raw_count[1:5,1:5]
-  sample_info <- readRDS("F:/sheep_adaptation/data/all_sample_phenotype.rds")
+  sample_info <- readRDS("<SET_YOUR_DIR>/all_sample_phenotype.rds")
   head(sample_info)
   table(sample_info$group)
-  tissue_info <- readRDS("F:/sheep_adaptation/data/tissue_info.rds")
+  tissue_info <- readRDS("<SET_YOUR_DIR>/tissue_info.rds")
   head(tissue_info)
   Tissue <- unique(tissue_info$tissue)
   
@@ -97,7 +96,7 @@ for (i in 1:length(Tissue)) {
   # new traitData
   sample <- rownames(dataExpr)
   traitData <- traitData[sample,]
-  save(dataExpr,traitData,file=paste("./data/",Tissue[i],"_WGCNA_input.RData",sep="")) 
+  save(dataExpr,traitData,file=paste("<SET_YOUR_DIR>",Tissue[i],"_WGCNA_input.RData",sep="")) 
   
   #***********************************************************************************************#
   #                                              WGCNA                                            #
@@ -139,7 +138,7 @@ adjacency = adjacency(dataExpr, power = sft$powerEstimate) # sft$powerEstimate
 TOM = TOMsimilarity(adjacency) 
 dissTOM = 1-TOM
 geneTree = hclust(as.dist(dissTOM), method = "average") 
-save(geneTree,dissTOM,file=paste("./data/",Tissue[i],"_WGCNA_matrix.RData",sep="")) 
+save(geneTree,dissTOM,file=paste("<SET_YOUR_DIR>/",Tissue[i],"_WGCNA_matrix.RData",sep="")) 
 
 
 
@@ -221,7 +220,6 @@ summary(module_gene)
 save(module_gene,file =  paste("./result/",Tissue[i],"_cluster_gene.RData",sep=""))
 
 rm(list=ls())
-
 }
 
 
