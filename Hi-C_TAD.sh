@@ -54,7 +54,7 @@ b=($(cut -f3 sheep.bed))
 mkdir 40K 
 
 
-for i in $(cat ~/2workspace/HI_C/ref/sheep_chr.txt)	
+for i in $(cat <YOUR_PATH>/sheep_chr.txt)	
 do
 awk -v x=${a[i-1]} -v y=${b[i-1]} '{if(x<=$1&&$1<=y&&$2>=x&&$2<=y){print $0}}' tibetan_hic_40000.matrix |awk -v x=${a[i-1]} '{print $1-x "\t" $2-x "\t" $3}'  >./40K/"$i"_"$i".txt
 done
@@ -83,6 +83,6 @@ conda activate TADLib
 ~/anaconda3/envs/TADLib/bin/hitad -O $output_path/TAD_40K.txt \
 -d $output_path/meta_file \
 -p 30 \
---logFile $output_path/hitad.log && echo "**** TAD calling finish ! ****"
+--logFile $output_path/hitad.log && echo "**** TAD detect finish ! ****"
 
 date
