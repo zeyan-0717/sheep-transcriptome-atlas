@@ -57,7 +57,7 @@ for (i in 1:length(Tissue)) {
   DCG[[paste(Tissue[i],"_DCG",sep="")]] <- sigs$sig.genes$sig.profiles
 
 }
-rm(raw_count)
+rm(raw_count);gc()
 
 
 for (j in 1:length(Tissue[j])) {
