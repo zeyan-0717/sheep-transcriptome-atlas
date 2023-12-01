@@ -77,3 +77,5 @@ for (i in 1:length(mytissue))
   write.table(res3[,c(1:3,12)],paste("./parent/",mytissue[i],"_BC_F0_tmp.bed",sep=""),sep = "\t",quote = F,row.names = F,col.names = F) # *.bed
   
 }
+
+## You may need HPC to run above codes
