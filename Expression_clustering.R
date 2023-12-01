@@ -47,14 +47,14 @@ colnames(df) <- df1$geneid
 class(df)
 tpm <- df
 # save expression matrix
-save(raw_count,file = "F:/sheep_adaptation/data/all_raw_count_matrix.RData")
-save(tpm,file = "F:/sheep_adaptation/data/all_tpm_matrix.RData")
-rm(DF,DF1,DF2,DF3,df,df1,df2,df3,raw_count)
+save(raw_count,file = "<YOUR_PATH>/all_raw_count_matrix.RData")
+save(tpm,file = "<YOUR_PATH>/all_tpm_matrix.RData")
+rm(DF,DF1,DF2,DF3,df,df1,df2,df3,raw_count);gc()
 
 
 ## step 2: generate sample phenotype table (option)
 info <- data.frame(sampleid=rownames(tpm))
-# df1 <- readxl::read_excel("F:/sheep_adaptation/tissue_abrev.xlsx")
+# df1 <- readxl::read_excel("<YOUR_PATH>/tissue_abrev.xlsx")
 df1 <- str_split(info$sampleid,"_",simplify = T) %>% as.data.frame()
 head(df1)
 names(df1) <- c("id","tissueID")
@@ -131,19 +131,19 @@ df4 <- info %>% mutate(group = case_when(id %in% g1 ~ "D0_Hu",id %in% g2 ~ "D06_
 head(df4)
 dim(df4)
 rownames(df4) <- df4$sampleid
-saveRDS(df4, file = "F:/sheep_adaptation/data/all_sample_phenotype.rds")
+saveRDS(df4, file = "<YOUR_PATH>/all_sample_phenotype.rds")
 # tissue info
 tissue_info <- distinct(meta[,c("tissueID","tissue","type")])
-saveRDS(tissue_info, file = "F:/sheep_adaptation/data/tissue_info.rds")
+saveRDS(tissue_info, file = "<YOUR_PATH>/tissue_info.rds")
 
 
 ## step 3: t-SNE clustering all samples
 library(Rtsne)
 
 set.seed(1234)
-tsne_res = Rtsne(tpm, dims = 2, pca = T,
-                 max_iter = 2000,theta = 0.4,perplexity = 30,verbose = F) # iteration number can change(max_iter)
+tsne_res = Rtsne(tpm, dims = 2, pca = T, max_iter = 2000,theta = 0.4,perplexity = 30,verbose = F) # iteration number can change(max_iter)
 tsne_res$itercosts
+
 ## extract t-SNE result
 info <- df4
 tsne <- as.data.frame(tsne_res$Y)
@@ -153,7 +153,7 @@ tsne$Group <- info$group
 tsne$Type <- info$type
 tsne$Generation <- info$generation
 class(tsne)
-saveRDS(tsne,file = "F:/sheep_adaptation/expression/all_sample_tsne.rds")
+saveRDS(tsne,file = "<YOUR_PATH>/all_sample_tsne.rds")
 
 ## visualize
 # method 1: based on tissue type
