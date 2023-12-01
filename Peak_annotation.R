@@ -18,7 +18,7 @@ library(AnnotationHub)
 ## create background gene
 require(AnnotationHub)
 hub <- AnnotationHub()
-query(hub,"Ovis aries")
+query(hub,"Ovis aries") # determine your species
 # AH94094 | org.Ovis_aries.eg.sqlite 
 sheep_orgdb <- hub[["AH101101"]]
 
@@ -64,11 +64,11 @@ head(peakAnno)
 str(peakAnno)
 # saveRDS(peakAnno,"ts_peak_oneTissue.rds")
 peakAnno$category <- str_split(string = peakAnno$annotation,pattern = "\\(",simplify = T)[,1] 
-dput(unique(peakAnno$category)) # check genomic feature name
 peakAnno <- rename(peakAnno,"tissue" = "V4")
 length(unique(peakAnno$geneId))
 table(peakAnno$category)
 saveRDS(peakAnno,"ts_peak1_chipseek_res.rds")
+
 # overlap gene
 Tissue <- unique(peakAnno$tissue)
 common_gene1 <- list()
