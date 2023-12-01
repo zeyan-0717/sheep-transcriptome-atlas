@@ -18,15 +18,6 @@ head(tad_GR)
 head(as.data.frame(tad_GR))
 
 ## input gene coordinate
-# chr, start, end, gene_id, gene_name
-# last two column need to be added by below function
-# gene_name is necessary (generally is gene symbol, can be place by ensembl_id)
-# gene_pos <- read.table("./data/sheep_gene.bed",header = FALSE)
-# head(gene_pos)
-# gene_pos$gene_name <- gene_pos$V4
-# write.table(gene_pos[,-5],"./data/inTAD_gene_coordinate.bed",col.names = F,row.names = F, quote = F, sep = "\t")
-# rm(gene_pos)
-# retrieve gene coordinate
 extraCols_gene_coordinate <- c(gene_id=c("character"),gene_name=("character"))
 import_bed6 <- function(x) {
   import(x, format="BED", extraCols = extraCols_gene_coordinate)
@@ -36,7 +27,7 @@ head(gene_GR)
 head(as.data.frame(gene_GR))
 
 
-## input peak and gene quantification files
+## input peak and gene expresseion  files
 # expression files
 tpm <- get(load("./data/all_tpm_matrix.RData"))
 tpm[1:5,1:5]
