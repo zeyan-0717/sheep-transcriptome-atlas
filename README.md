@@ -14,13 +14,13 @@ There are five main parts of analysis in our study, including **WGS, RNA-Seq, sc
 Genome reference and annotation files used in this study are downloaded from Ensembl genome browser: https://asia.ensembl.org/Ovis_aries_rambouillet/Info/Index (i.e., **Oar_rambouillet_v1.0**).
 
 ### 2.3 Data table
-Details about newly generated sequencing data and public data in this study are summarized in the **"Data_table.xlsx"** file.
+To enhance the reusability and reproducibility of our data, and fully facilitate them for secondary analysis and novel discoveries, we uploaded **"Data table.xlsx"** which include **sample collection, information for sequencing sample, and metatables for sequencing datasets**. You can clearly find the details about newly generated sequencing data and public data in this study.
 
 ### 2.4 Result files
 We provide **integrated expression matrix, consensus peak set with metatables and measurement phenotypic data** in our study, which have been uploaded to Google Drive: https://drive.google.com/file/d/1iTbn5IVPGVGEp7nkeNCgjDvtqjXjPQQ8/view?usp=sharing.
 
 
 ## 3.Data availability 
-High-throughput sequencing data in this study are publicly available for download without restriction, which was deposited in the Sequence Read Archive (SRA) database in NCBI under accession numbers: PRJNA1053506 (WGS), PRJNA1000743 (bulk RNA-Seq), PRJNA1001016 (bulk RNA-Seq) and PRJNA1001505 (scRNA-Seq, ATAC-Seq).
+High-throughput sequencing data in this study are publicly available for download without restriction, which was deposited in the Sequence Read Archive (SRA) database in NCBI under accession numbers: PRJNA1053506 (WGS), PRJNA1000743 (bulk RNA-Seq), PRJNA1001016 (bulk RNA-Seq) and PRJNA1001505 (scRNA-Seq, ATAC-Seq). 
 
 Any questions, please feel free to contact yanze@cau.edu.cn.
