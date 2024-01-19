@@ -21,6 +21,6 @@ We provide **integrated expression matrix, consensus peak set with metatables an
 
 
 ## 3.Data availability 
-High-throughput sequencing data in this study are publicly available for download without restriction, which was deposited in the Sequence Read Archive (SRA) database in NCBI under accession numbers: PRJNA1053506 (WGS), PRJNA1000743 (bulk RNA-Seq), PRJNA1001016 (bulk RNA-Seq) and PRJNA1001505 (scRNA-Seq, ATAC-Seq). 
+High-throughput sequencing data in this study are publicly available for download without restriction, which was deposited in the Sequence Read Archive (SRA) database in NCBI under accession numbers: **PRJNA1053506 (WGS), PRJNA1000743 (bulk RNA-Seq), PRJNA1001016 (bulk RNA-Seq) and PRJNA1001505 (scRNA-Seq, ATAC-Seq).** 
 
 Any questions, please feel free to contact yanze@cau.edu.cn.
