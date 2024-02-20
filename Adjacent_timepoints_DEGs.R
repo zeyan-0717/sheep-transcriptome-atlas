@@ -1,6 +1,6 @@
 library(tidyverse)
 library(DESeq2)
-options(stringsAsFactors = T)
+options(stringsAsFactors = F)
 
 ## set dir
 setwd("<SET_YOUR_PATH/DEG/raw_DEG_res>")
