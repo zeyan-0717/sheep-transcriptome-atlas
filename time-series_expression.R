@@ -79,7 +79,7 @@ for (j in 1:length(Tissue[j])) {
   M8_avg <- scg_mat[,M8] %>% apply(1,FUN = mean)
   avg_exp <- data.frame(D0 = D0_avg, D7=D7_avg,D14=D14_avg,D21=D21_avg,M08=M8_avg) %>% as.matrix()
   head(avg_exp)
-  rm(D0,D0_avg,D6,D6_avg,D13,D13_avg,D20,D20_avg,M8_avg,M8)
+  rm(D0,D0_avg,D7,D7_avg,D14,D14_avg,D21,D21_avg,M8_avg,M8)
   
   ## analysis
   mfuzz_class <- new("ExpressionSet",exprs=avg_exp)
