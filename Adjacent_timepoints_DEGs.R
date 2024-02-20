@@ -18,10 +18,10 @@ table(sample_info$group)
 
 
 ## define group
-group1 <- c("D0_Hu","D06_Hu") 
-group2 <- c("D06_Hu","D13_Hu")
-group3 <- c("D13_Hu","D20_Hu")
-group4 <- c("D20_Hu","M08_Hu")
+group1 <- c("D0_Hu","D07_Hu") 
+group2 <- c("D07_Hu","D14_Hu")
+group3 <- c("D14_Hu","D21_Hu")
+group4 <- c("D21_Hu","M08_Hu")
 group5 <- c("M08_Hu","Tibetan")
 Group <- list(group1,group2,group3,group4,group5)
 
