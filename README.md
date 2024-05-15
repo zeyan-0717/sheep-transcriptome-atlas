@@ -3,7 +3,7 @@
 ## 1. Introduction
 This repository provides the scripts used in the paper **"A time-resolved multi-omics atlas of transcriptional regulation in response to high-altitude hypoxia across whole-body tissues"**. 
 
-High-altitude hypoxia acclimatization requires whole-body physiological regulation in highland immigrants, but the underlying genetic mechanism has not been clarified. Here we used sheep as an animal model for plain-to-plateau translocationplantation. We generated multi-omics data including **49 whole genome sequencing, 1,277 time-resolved bulk RNA-Seq, 66 ATAC-Seq and 6 single-cell RNA-Seq datasets** from multiple tissues as well as **phenotypic data from 20 bio-indicators**. Our study provides valuable resources and insights for future hypoxia-related studies in mammals.
+High-altitude hypoxia acclimatization requires whole-body physiological regulation in highland immigrants, but the underlying genetic mechanism has not been clarified. Here we used sheep as an animal model for low-to-high altitude translocation. We generated multi-omics data including **49 whole genome sequencing, 1,277 time-resolved bulk RNA-Seq, 66 ATAC-Seq and 6 single-cell RNA-Seq datasets** from multiple tissues as well as **phenotypic data from 20 bio-indicators**. Our study provides valuable resources and insights for future hypoxia-related studies in mammals.
 
 Our work is out now on **Nature Communications**: https://doi.org/10.1038/s41467-024-48261-w.
 
