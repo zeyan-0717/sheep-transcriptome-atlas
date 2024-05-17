@@ -28,4 +28,4 @@ High-throughput sequencing data in this study are publicly available for downloa
 ## 4. Citation
 Yan, Z., Yang, J., Wei, WT. et al. A time-resolved multi-omics atlas of transcriptional regulation in response to high-altitude hypoxia across whole-body tissues. **Nat. Commun.** 15, 3970 (2024).
 
-Any questions, please feel free to contact yanze@cau.edu.cn.
+Contributor: Ze Yan, Fenghua Lv. Any questions, please feel free to contact yanze@cau.edu.cn.
